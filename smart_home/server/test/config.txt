@@ -1,0 +1,1 @@
+[Temprature-1-a]|TestHVAC|room_1_a|floor = 1|log = aaa|units: F; lower: -5; upper:55; period: 12|
