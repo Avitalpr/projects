@@ -17,10 +17,10 @@ jobs:
     - name: Install SFML
       run: sudo apt-get install -y libsfml-dev
       
-    - name: Server build and test
-      run: make check
+    - name: Server build 
+      run: make prod
       working-directory: smart_home/server/test
     
-    - name: Client build and test
-      run: make check
+    - name: Client build 
+      run: make utest
       working-directory: smart_home/client/test
