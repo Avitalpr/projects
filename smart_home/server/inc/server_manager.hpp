@@ -48,9 +48,7 @@ private:
     Server m_server;
     mt::ThreadGroup<std::shared_ptr<details_impl::Args>> m_eventHandlers;
     std::shared_ptr<details_impl::Args> m_args;
-    
-    // std::unique_ptr<Controller> m_controller;
-    
+
 };
 
 

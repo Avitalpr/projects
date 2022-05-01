@@ -21,14 +21,21 @@
 #include "reader.hpp"
 #include "config_data.hpp"
 #include "loader.hpp"
-
+#include <exception>
 
 BEGIN_TEST(run_game)
     using namespace smart_home;
     auto ptr = std::make_shared<Router>();
     ServerManager manager(ptr);
-    manager.run();
-
+    try
+    {
+         manager.run();
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    
     ASSERT_PASS();
 
 

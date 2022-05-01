@@ -1,1 +1,2 @@
-[Temprature-1-a]|TestHVAC|room_1_a|floor = 1|log = aaa|units: F; lower: -5; upper:55; period: 12|
+[Temprature-1-a]|temperature alert|room_1|1|aaa|units: F; lower: -5; upper:55; period: 12|
+[sprinkler-1-a]|smoke alert|room_55|5|safety|On:Fire_Detected; Smoke_Detected; IoT: 10.10.3.42|

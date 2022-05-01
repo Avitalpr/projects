@@ -6,6 +6,7 @@
 #include "protocol.hpp"
 #include "event.hpp"
 #include "loader.hpp"
+#include <exception>
 
 namespace smart_home
 {
@@ -57,7 +58,7 @@ void MsgReceivedFunc(int a_clientID, void* a_buffer, int a_bufferSize, void* a_c
 {
     char const* buffer = static_cast<char const*>(a_buffer);
     cpp::BlockingQueue<Event<int> >* queue = static_cast<cpp::BlockingQueue<Event<int> >* >(a_context);
-    
+
     queue->enqueue(std::move(protocol::unpack<int>(buffer)));
 }
 
@@ -86,13 +87,25 @@ void ServerManager::run()
     CreateController creator;
     for(auto const& e: agents)
     {
-        std::shared_ptr<Controller> control = creator.create(e)(e);
-        std::vector<Interest> interes = control->getInterests();
+        std::function<std::shared_ptr<Controller>(const ConfigData&)> it;
+        try
+        {
+            it = creator.getController(e);
+            
+        }
+        catch(const std::exception& e)
+        {
+            throw e;
+        }
+        
+        std::shared_ptr<Controller> controller = it(e);
+        std::vector<Interest> interes = controller->getInterests();
         for(auto e: interes)
         {
-            m_router->attach(control, e);
+            m_router->attach(controller, e);
         }
     }
+
     eventsHandler();
     m_server.ServerRun();
 }

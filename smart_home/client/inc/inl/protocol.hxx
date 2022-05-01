@@ -30,7 +30,6 @@ size_t pack(smart_home::Event<T> const& a_event, char* a_buffer)
     insertToBuffer(std::to_string(a_event.data()), a_buffer, offset);
     insertToBuffer(a_event.timestamp().toString(), a_buffer, offset);
     
-    std::cout << "offset: " << offset << "\n";
     a_buffer[0] = offset;
     return offset;
 
@@ -74,7 +73,7 @@ smart_home::Event<T> unpack(char const* a_message)
         std::string str(a_message + i, a_message + (i + a_message[i - 1]));
         vec.push_back(str);
     }
-    std::cout << vec[0] << " " << vec[1] << " " << vec[2] << " " << vec[3] << "\n";
+ 
     return smart_home::Event<T>(std::stoul(vec[2], 0, 0), createTimeStamp(vec[3]), createLocation(vec[1]),  vec[0]);
 }
 

@@ -1,15 +1,33 @@
 #include "mu_test.h"
 #include "temperature_sensor.hpp"
+#include "smoke_sensor.hpp"
+#include "sensor_manager.hpp"
 #include "date_time.hpp"
 #include "location.hpp"
-//#include "event.hpp"
 #include "protocol.hpp"
+
+// BEGIN_TEST(communication_test)
+
+//     smart_home::TemperatureSensor sensor('C', "on");
+//     sensor.sample();
+//     sensor.notify();
+//     while(true);
+
+//     ASSERT_PASS();
+
+// END_TEST
 
 BEGIN_TEST(communication_test)
 
-    smart_home::TemperatureSensor sensor('C', "on");
-    sensor.sample();
-    sensor.notify();
+    using namespace smart_home;
+    using Container = std::vector<std::shared_ptr<Sensor>>;
+    Container sensors;
+    sensors.push_back(std::move(std::make_shared<TemperatureSensor>('C', "on")));
+    sensors.push_back(std::move(std::make_shared<SmokeSensor>("on")));
+    
+    smart_home::SensorManager sm(sensors);
+    sm.run();
+
     while(true);
 
     ASSERT_PASS();

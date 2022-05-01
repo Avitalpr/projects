@@ -40,18 +40,19 @@ TemperatureSensor::TemperatureSensor(TemperatureMeasure a_type, Mode const& a_mo
 , m_currentSample()
 {}
 
+
+void TemperatureSensor::generateSample()
+{
+      
+    // random int temperatures generator
+    int temperature = m_type.min() + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(m_type.max() - m_type.min())));
+    m_currentSample.data(temperature);
+}
+
 void TemperatureSensor::sample()
 {
-    // random float temperatures generator
-    
-    //float temperature = m_type.min() + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(m_type.max() - m_type.min())));
-    int temperature = 45;
-    DateTime timestamp;
-    Location location("1", "22");
-    
-    m_currentSample.data(temperature);
-    m_currentSample.location(location);
-    m_currentSample.timestamp(timestamp);
+    m_currentSample.location(Location("1", "room_1"));
+    m_currentSample.timestamp(DateTime());
     m_currentSample.type("temperature alert");
     
 }

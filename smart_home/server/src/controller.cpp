@@ -10,28 +10,12 @@ TemperatureController::TemperatureController(const ConfigData& a_configData)
 , m_data(a_configData)
 , m_interests()
 {
-    m_interests.push_back(Interest("temperature alert", Location("1", "22")));
+    m_interests.push_back(Interest(m_data.GetType(), Location(m_data.GetFloor(), m_data.GetRoom())));
 }
 
 std::vector<Interest>& TemperatureController::getInterests()
 {
     return m_interests;
-}
-
-
-bool TemperatureController::notify()
-{
-    return true;
-}
-
-bool TemperatureController::setDevice()
-{
-    return true;
-}
-
-bool TemperatureController::IsSafety()
-{
-    return true;
 }
 
 void TemperatureController::connect()

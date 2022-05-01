@@ -18,9 +18,6 @@ public:
 
     virtual ~Controller() = default;
 
-    virtual bool notify() = 0;
-    virtual bool setDevice() = 0;
-    virtual bool IsSafety() = 0;
     virtual void initialize(const ConfigData&) = 0;
     virtual void connect() = 0;
     virtual std::vector<Interest>& getInterests() = 0;
@@ -38,11 +35,7 @@ private:
 class TemperatureController : public Controller
 {
 public:
-    TemperatureController(const ConfigData& a_configData);//, float a_temp = float());
-
-    bool notify() override;
-    bool setDevice() override;
-    bool IsSafety() override;
+    TemperatureController(const ConfigData& a_configData);
 
     void initialize(const ConfigData&) override;
     void connect() override;

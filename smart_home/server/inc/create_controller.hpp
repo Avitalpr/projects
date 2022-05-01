@@ -15,9 +15,10 @@ class CreateController
 public:
     CreateController();
 
-    std::function<std::shared_ptr<Controller>(const ConfigData&)> create(const ConfigData& a_configData);
+    std::function<std::shared_ptr<Controller>(const ConfigData&)> getController(const ConfigData& a_configData);
 
     std::shared_ptr<Controller> createTemperatureController(const ConfigData& a_configData);
+    std::shared_ptr<Controller> createSmokeController(const ConfigData& a_configData);
 
 
 private:

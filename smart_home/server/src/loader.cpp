@@ -24,17 +24,19 @@ bool Loader::CreateAgent(const ConfigData& a_confData) const
     std::exception ex;
 	void* lib_handle;
 	Controller* (*fn)(void);
-	std::string soPath = "./so/libc" + a_confData.GetType() + ".so";
+	std::string soPath = "./" + a_confData.GetType() + ".so";
 	
 	lib_handle = dlopen(soPath.c_str(), RTLD_LAZY);
 	if (!lib_handle)
 	{
+		std::cout << "dlopen\n";
 		throw ex;
 	}
 
 	fn = (Controller*(*)())dlsym(lib_handle, "connect");
 	if (dlerror())
 	{
+		std::cout << "dlsym\n";
 		throw ex;
 	}	
 

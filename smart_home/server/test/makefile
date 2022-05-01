@@ -10,15 +10,23 @@ CPPFLAGS = -I$(INC_DIR)
 INC_DIR = ../inc
 SRC_DIR = ../src
 
+# $(SRC_DIR)/controller.o: CFLAGS += -fPIC
+# $(SRC_DIR)/controller.o: controller.cpp
+
+# $(SRC_DIR)/controller.o: CFLAGS += -fPIC
+# $(SRC_DIR)/smoke_controller.o: smoke_controller.cpp
+
 LDLIBS = -L /home/ -lpthread -rdynamic  -ldl -W
 
 TARGET = utest
 
-OBJS = utest.o $(SRC_DIR)/controller.o $(SRC_DIR)/router.o $(SRC_DIR)/server.o $(SRC_DIR)/server_manager.o $(SRC_DIR)/interest.o $(SRC_DIR)/config_data.o $(SRC_DIR)/reader.o $(SRC_DIR)/parser.o $(SRC_DIR)/create_controller.o $(SRC_DIR)/loader.o $(SRC_DIR)/logger.o
+OBJS = utest.o $(SRC_DIR)/controller.o $(SRC_DIR)/smoke_controller.o $(SRC_DIR)/router.o $(SRC_DIR)/server.o $(SRC_DIR)/server_manager.o $(SRC_DIR)/interest.o $(SRC_DIR)/config_data.o $(SRC_DIR)/reader.o $(SRC_DIR)/parser.o $(SRC_DIR)/create_controller.o $(SRC_DIR)/loader.o $(SRC_DIR)/logger.o
 
-utest.o: $(INC_DIR)/mu_test.h $(INC_DIR)/controller.hpp $(INC_DIR)/observer.hpp $(INC_DIR)/router.hpp $(INC_DIR)/subject.hpp $(INC_DIR)/server.hpp $(INC_DIR)/server_manager.hpp $(INC_DIR)/interest.hpp $(INC_DIR)/config_data.hpp $(INC_DIR)/reader.hpp $(INC_DIR)/parser.hpp $(INC_DIR)/create_controller.hpp $(INC_DIR)/loader.hpp $(INC_DIR)/logger.hpp
+utest.o: $(INC_DIR)/mu_test.h $(INC_DIR)/controller.hpp $(INC_DIR)/controller.hpp $(INC_DIR)/observer.hpp $(INC_DIR)/router.hpp $(INC_DIR)/subject.hpp $(INC_DIR)/server.hpp $(INC_DIR)/server_manager.hpp $(INC_DIR)/interest.hpp $(INC_DIR)/config_data.hpp $(INC_DIR)/reader.hpp $(INC_DIR)/parser.hpp $(INC_DIR)/create_controller.hpp $(INC_DIR)/loader.hpp $(INC_DIR)/logger.hpp
 
 $(SRC_DIR)/controller.o: $(INC_DIR)/controller.hpp $(INC_DIR)/observer.hpp $(INC_DIR)/config_data.hpp
+
+$(SRC_DIR)/smoke_controller.o: $(INC_DIR)/controller.hpp $(INC_DIR)/config_data.hpp
 
 $(SRC_DIR)/router.o: $(INC_DIR)/router.hpp $(INC_DIR)/subject.hpp $(INC_DIR)/observer.hpp $(INC_DIR)/interest.hpp
 

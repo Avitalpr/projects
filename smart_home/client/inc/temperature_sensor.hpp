@@ -40,6 +40,9 @@ public:
     void notify();
 
 private:
+    void generateSample();
+
+private:
     TemperatureMeasure m_type;
     Mode m_mode;
     Sample m_currentSample;
