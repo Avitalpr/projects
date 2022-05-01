@@ -14,9 +14,9 @@ LDLIBS = -L /home/ -lpthread -rdynamic  -ldl -W
 
 TARGET = utest
 
-OBJS = utest.o $(SRC_DIR)/controller.o $(SRC_DIR)/router.o $(SRC_DIR)/server.o $(SRC_DIR)/server_manager.o $(SRC_DIR)/interest.o $(SRC_DIR)/config_data.o $(SRC_DIR)/reader.o $(SRC_DIR)/parser.o $(SRC_DIR)/create_controller.o $(SRC_DIR)/loader.o
+OBJS = utest.o $(SRC_DIR)/controller.o $(SRC_DIR)/router.o $(SRC_DIR)/server.o $(SRC_DIR)/server_manager.o $(SRC_DIR)/interest.o $(SRC_DIR)/config_data.o $(SRC_DIR)/reader.o $(SRC_DIR)/parser.o $(SRC_DIR)/create_controller.o $(SRC_DIR)/loader.o $(SRC_DIR)/logger.o
 
-utest.o: $(INC_DIR)/mu_test.h $(INC_DIR)/controller.hpp $(INC_DIR)/observer.hpp $(INC_DIR)/router.hpp $(INC_DIR)/subject.hpp $(INC_DIR)/server.hpp $(INC_DIR)/server_manager.hpp $(INC_DIR)/interest.hpp $(INC_DIR)/config_data.hpp $(INC_DIR)/reader.hpp $(INC_DIR)/parser.hpp $(INC_DIR)/create_controller.hpp $(INC_DIR)/loader.hpp
+utest.o: $(INC_DIR)/mu_test.h $(INC_DIR)/controller.hpp $(INC_DIR)/observer.hpp $(INC_DIR)/router.hpp $(INC_DIR)/subject.hpp $(INC_DIR)/server.hpp $(INC_DIR)/server_manager.hpp $(INC_DIR)/interest.hpp $(INC_DIR)/config_data.hpp $(INC_DIR)/reader.hpp $(INC_DIR)/parser.hpp $(INC_DIR)/create_controller.hpp $(INC_DIR)/loader.hpp $(INC_DIR)/logger.hpp
 
 $(SRC_DIR)/controller.o: $(INC_DIR)/controller.hpp $(INC_DIR)/observer.hpp $(INC_DIR)/config_data.hpp
 
@@ -24,7 +24,7 @@ $(SRC_DIR)/router.o: $(INC_DIR)/router.hpp $(INC_DIR)/subject.hpp $(INC_DIR)/obs
 
 $(SRC_DIR)/server.o: $(INC_DIR)/server.hpp
 
-$(SRC_DIR)/server_manager.o: $(INC_DIR)/server_manager.hpp $(INC_DIR)/router.hpp $(INC_DIR)/subject.hpp $(INC_DIR)/protocol.hpp $(INC_DIR)/event.hpp $(INC_DIR)/controller.hpp
+$(SRC_DIR)/server_manager.o: $(INC_DIR)/server_manager.hpp $(INC_DIR)/router.hpp $(INC_DIR)/subject.hpp $(INC_DIR)/protocol.hpp $(INC_DIR)/event.hpp $(INC_DIR)/controller.hpp $(INC_DIR)/logger.hpp $(INC_DIR)/blocking_queue.hpp
 
 $(SRC_DIR)/interest.o: $(INC_DIR)/interest.hpp
 
@@ -38,6 +38,7 @@ $(SRC_DIR)/create_controller.o: $(INC_DIR)/create_controller.hpp $(INC_DIR)/cont
 
 $(SRC_DIR)/loader.o: $(INC_DIR)/loader.hpp $(INC_DIR)/reader.hpp $(INC_DIR)/config_data.hpp $(INC_DIR)/controller.hpp $(INC_DIR)/router.hpp
 
+$(SRC_DIR)/logger.o: $(INC_DIR)/logger.hpp
 
 $(TARGET): $(OBJS)
 

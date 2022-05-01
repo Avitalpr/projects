@@ -21,6 +21,7 @@ public:
     Event(const DataPayload& a_data, const DateTime& a_timestamp, const Location& a_location, const EventType& a_type);
     
     Event(const Event& a_other) = default;
+
     Event(Event&& a_other) noexcept;
     
     Event& operator=(const Event& a_other) = default;
@@ -36,6 +37,8 @@ public:
     void timestamp(DateTime const& a_time);
     void location(Location const& a_location);
     void type(EventType const& a_type);
+
+    std::string toString() const;
 
 private:
     DataPayload m_data;

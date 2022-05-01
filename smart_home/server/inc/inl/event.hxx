@@ -84,5 +84,17 @@ void Event<T>:: type(EventType const& a_type)
     m_type = a_type;
 }
 
+template <typename T>
+std::string Event<T>::toString() const{
+    return m_type + " " +m_location.toString() + " " + m_timestamp.toString();// + " " + std::to_string(data);
+
+
+
+
+
+
+
+}
+
 } // namespace smart_home
 

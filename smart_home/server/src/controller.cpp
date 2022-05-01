@@ -5,12 +5,12 @@
 namespace smart_home
 {
 
-TemperatureController::TemperatureController(const ConfigData& a_configData) //float a_temp)
+TemperatureController::TemperatureController(const ConfigData& a_configData)
 : Controller()
 , m_data(a_configData)
 , m_interests()
 {
-    m_interests.push_back(Interest("temperature alert", Location("1", "22")));//m_data.GetRoom(), m_data.GetFloor())));
+    m_interests.push_back(Interest("temperature alert", Location("1", "22")));
 }
 
 std::vector<Interest>& TemperatureController::getInterests()

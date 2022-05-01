@@ -13,15 +13,14 @@
 #include <cassert>
 #include <iostream>
 #include "server.hpp"
-// #include "protocol.hpp"
 
-#define SERVER_PORT 8888
-#define SERVER_IP  "127.0.0.1"
-#define MAX_FD 1024
-#define ON 1
-#define OFF 0
-#define FAIL -1
-#define ERR_SIZE 100
+const int SERVER_PORT = 8888;
+const char* SERVER_IP = "127.0.0.1";
+const int MAX_FD = 1024;
+const bool ON = 1;
+const bool OFF = 0;
+const int FAIL = -1;
+const int ERR_SIZE = 100;
 
 
 Server::Server(size_t a_MTU, size_t a_max, ParamsContext a_context)
@@ -45,13 +44,11 @@ Status Server::ServerRun()
 	fd_set temp;
 	int activity = 0;
 	m_status = ON;
-	std::cout << "barrrr\n";
+
 	while(m_status == ON) 
 	{
 		temp = m_master;
 		activity = select (MAX_FD, &temp , nullptr, nullptr, nullptr);
-		std::cout << "run " << activity << "\n";
-		sleep(3);
 
 		if(FD_ISSET(m_listenerSocket, &temp) == 1)
 		{	
@@ -174,7 +171,6 @@ int Server::CheckNewClients ()
 		FD_SET(sock, &m_master);
 		++m_clientsCounter;
 		
-		printf ("accept\n");
 		return sockNum ;
 	}
 }
@@ -182,7 +178,6 @@ int Server::CheckNewClients ()
 
 int Server::Receive(int  a_sock)
 {
-	std::cout << "receive\n";
 	size_t msgSize = 0;
 	int bytes_received = 0;
 	char* bufferRecv = new char[m_MTU];
@@ -191,24 +186,17 @@ int Server::Receive(int  a_sock)
 	do{
 		bytes_received = recv(a_sock, p, 1, 0);
 
-		//std::cout << "bytes rec: " << bytes_received << "\n";
-		//std::cout << "length: " << *p << "\n";
 		 if(bytes_received == -1 || bytes_received == 0)
 		 {
 		 	return RECV_FAIL;  
 		 }
 		 msgSize = *p - 1;
-		 //std::cout <<"first\n";
 		 p += bytes_received;
 
 	}
 	while(bytes_received != 1);
 	size_t origSize = msgSize;
 	assert(bytes_received < int(m_MTU));
-	std::cout <<"here\n";
-	std::cout << "sec loop " << p << "\n"; 
-		std::cout << "size: " << msgSize << "\n";
-		std::cout << "bytes rec: " << bytes_received << "\n";
 	do
 	{
 		bytes_received = recv (a_sock,p, msgSize, 0);
@@ -221,33 +209,11 @@ int Server::Receive(int  a_sock)
 
 	} while (msgSize > 0);
 
-	bufferRecv [origSize] = '\0';
-	std::cout << " hi\n";
     m_AppFunctions.m_msgReceived (a_sock , bufferRecv , origSize ,m_AppFunctions.m_context);
-  
-	sleep(3);
+
    delete[] bufferRecv;
    return SERVER_OK ;
 }
-
-// int Server::Receive(int  a_sock)
-// {
-// 	std::cout << "bar\n";
-// 	int bytes_received;
-// 	char errorBuffer[ERR_SIZE];
-// 	char* bufferRecv = new  char[m_MTU];
-
-// 	bytes_received = recv (a_sock, bufferRecv, m_MTU , 0);
-// 	if(bytes_received <= 0) 
-// 	{
-// 		sprintf ( errorBuffer ,"%s" , "Connection closed");
-// 		return RECV_FAIL;  
-// 	}
-
-// 	m_AppFunctions.m_msgReceived (a_sock , bufferRecv , bytes_received ,m_AppFunctions.m_context);
-// 	delete[] bufferRecv;
-// 	return SERVER_OK ;
-// }
 
 void Server::CheckCurrentClients(fd_set* a_temp, int a_activity) 
 {
@@ -271,7 +237,7 @@ void Server::CheckCurrentClients(fd_set* a_temp, int a_activity)
 				close(socket);
                 m_clientsList.erase(it);
 				--m_clientsCounter;
-				--it; // treat 
+				--it;
 				FD_CLR(socket, &m_master);
 			}
 			
