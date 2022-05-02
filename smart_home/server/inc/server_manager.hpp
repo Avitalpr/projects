@@ -6,6 +6,7 @@
 // #include "thread.hpp"
 #include "controller.hpp"
 #include <memory>
+#include <vector>
 #include "router.hpp"
 #include "subject.hpp"
 #include "reader.hpp"
@@ -13,6 +14,7 @@
 #include "blocking_queue.hpp"
 #include "event.hpp"
 #include "thread.hpp"
+#include "smart_home_ui.hpp"
 
 
 namespace smart_home
@@ -27,7 +29,8 @@ class Args;
 class ServerManager
 {
 public:
-    ServerManager(std::shared_ptr<Router> a_router);
+    using Devices = std::vector<std::shared_ptr<Device>>;
+    explicit ServerManager(std::shared_ptr<Router> a_router);
 
     void run();
 
@@ -48,6 +51,9 @@ private:
     Server m_server;
     mt::ThreadGroup<std::shared_ptr<details_impl::Args>> m_eventHandlers;
     std::shared_ptr<details_impl::Args> m_args;
+    Devices m_devices;
+    Home m_home;
+
 
 };
 

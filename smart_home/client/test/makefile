@@ -22,10 +22,9 @@ OBJS = utest.o  $(SRC_DIR)/temperature_sensor.o $(SRC_DIR)/smoke_sensor.o $(SRC_
 
 $(TARGET):$(OBJS)
 
-
+$(SRC_DIR)/sensor_manager.o: $(INC_DIR)/sensor_manager.hpp $(INC_DIR)/sensor.hpp
 $(SRC_DIR)/smoke_sensor.o: $(INC_DIR)/smoke_sensor.hpp $(INC_DIR)/sensor.hpp $(INC_DIR)/notify.hpp
 $(SRC_DIR)/temperature_sensor.o: $(INC_DIR)/temperature_sensor.hpp $(INC_DIR)/sensor.hpp $(INC_DIR)/notify.hpp
-$(SRC_DIR)/sensor_manager.o: $(INC_DIR)/temperature_sensor.hpp $(INC_DIR)/sensor.hpp $(INC_DIR)/sensor_manager.hpp
 utest.o: $(INC_DIR)/temperature_sensor.hpp $(INC_DIR)/smoke_sensor.hpp $(INC_DIR)/sensor_manager.hpp $(INC_DIR)/mu_test.h $(INC_DIR)/date_time.hpp $(INC_DIR)/location.hpp $(INC_DIR)/event.hpp
 
 check: $(TARGET)

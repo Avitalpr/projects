@@ -57,7 +57,7 @@ Status Server::ServerRun()
 		}
 
 		if(activity > 0)
-		{ 
+		{
 			CheckCurrentClients(&temp, activity);
 		}
 	

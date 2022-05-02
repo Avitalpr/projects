@@ -51,6 +51,7 @@ void TemperatureSensor::generateSample()
 
 void TemperatureSensor::sample()
 {
+    generateSample();
     m_currentSample.location(Location("1", "room_1"));
     m_currentSample.timestamp(DateTime());
     m_currentSample.type("temperature alert");

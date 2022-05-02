@@ -28,7 +28,7 @@ BEGIN_TEST(communication_test)
     smart_home::SensorManager sm(sensors);
     sm.run();
 
-    while(true);
+    // while(true);
 
     ASSERT_PASS();
 

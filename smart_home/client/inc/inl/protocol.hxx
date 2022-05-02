@@ -13,7 +13,7 @@ namespace protocol
     
 inline void insertToBuffer(std::string a_str, char* a_buffer, size_t& a_offset)
 {
-    std::cout << "str: " << a_str << "\n";
+
     a_buffer[a_offset] = a_str.size();
     strcpy(a_buffer + (a_offset + 1), a_str.c_str());
     a_offset += (a_str.size() + 1);

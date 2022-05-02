@@ -5,6 +5,7 @@
 namespace smart_home
 {
 
+
 class Observer
 {
 public:
